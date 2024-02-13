@@ -1,9 +1,6 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
 import pandas as pd
-import folium
-import geopandas
-from shapely.geometry import Point
 
 rm_data = pd.read_csv('dataset_rm.csv')
 # System of recomendation
@@ -96,7 +93,6 @@ dfd = rm_data[(rm_data["Stars"]==5)&(rm_data["state"]=="Delaware")][["State","Me
 dfD = rm_data[(rm_data["Sentiment"]=="Muy bueno")&(rm_data['state']=="Delaware")][["State","Mexican restaurant","Date","City","Address"]]
 
 col1,col2,col3,col4 = st.columns([2,2,2,2])
-
 with st.sidebar:
     selected = option_menu("Main Menu", ["Home", "Restaurants in USA", "Recomendations", 'System of recomendation','Location'], 
        icons=['house', 'cloud-upload', "list-task", 'gear'], 
@@ -298,6 +294,7 @@ if selected == 'System of recomendation':
             st.write(dfNJ.head())
         if col3.button("$Delaware_{✅}$"):
             st.write(dfD.head())
+
 if selected == "Location":
     if st.sidebar.checkbox("$Map$"):
         if st.button("$World\ Map$"):
